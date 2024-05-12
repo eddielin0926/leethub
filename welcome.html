@@ -28,17 +28,11 @@
         <br /><br /><br /><br /><br /><br /><br /><br />
         <p hidden id="error"></p>
         <p hidden id="success"></p>
-        <p hidden id="unlink">
-          Linked the wrong repo? <a>Unlink</a>.
-        </p>
+        <p hidden id="unlink">Linked the wrong repo? <a>Unlink</a>.</p>
       </div>
 
       <!-- Create Hook -->
-      <div
-        style="display: none"
-        id="hook_mode"
-        class="ui grid container"
-      >
+      <div style="display: none" id="hook_mode" class="ui grid container">
         <div class="six wide column">
           <p class="caption ui large header center aligned">
             To get started with LeetHub
@@ -49,12 +43,8 @@
             <div class="field">
               <select id="type">
                 <option value="">Pick an Option</option>
-                <option value="new">
-                  Create a new Private Repository
-                </option>
-                <option value="link">
-                  Link an Existing Repository
-                </option>
+                <option value="new">Create a new Private Repository</option>
+                <option value="link">Link an Existing Repository</option>
               </select>
             </div>
           </div>
@@ -74,40 +64,24 @@
 
         <div class="sixteen wide right aligned column">
           <br />
-          <button
-            id="hook_button"
-            disabled
-            class="positive ui button"
-          >
+          <button id="hook_button" disabled class="positive ui button">
             Get Started
           </button>
         </div>
       </div>
 
       <!-- Show stats -->
-      <div
-        style="display: none"
-        id="commit_mode"
-        class="ui grid container"
-      >
+      <div style="display: none" id="commit_mode" class="ui grid container">
         <div class="eight wide center aligned column">
           <br /><br />
-          <div
-            style="font-size: 2.3em"
-            class="ui inverted large header"
-          >
+          <div style="font-size: 2.3em" class="ui inverted large header">
             Problems Solved: <span id="p_solved">0</span>
           </div>
-          <div
-            styl="font-size: 2.3em"
-            class="ui inverted large header"
-          >
+          <div styl="font-size: 2.3em" class="ui inverted large header">
             <span style="color: #5cb85c">Easy:</span>
             <span id="p_solved_easy" style="color: #5cb85c">0 </span>
             <span style="color: #f0ad4e">&ensp; &ensp; Medium:</span>
-            <span id="p_solved_medium" style="color: #f0ad4e"
-              >0
-            </span>
+            <span id="p_solved_medium" style="color: #f0ad4e">0 </span>
             <span style="color: #d9534f">&ensp; &ensp; Hard:</span>
             <span id="p_solved_hard" style="color: #d9534f">0 </span>
           </div>
@@ -134,8 +108,7 @@
             target="_blank"
             href="https://github.com/QasimWani/LeetHub"
             >Star <span style="color: white">Leet</span
-            ><span style="color: orange !important">Hub</span> on
-            GitHub</a
+            ><span style="color: orange !important">Hub</span> on GitHub</a
           >
         </div>
       </div>
