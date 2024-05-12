@@ -1,16 +1,27 @@
 {
   "name": "leethub",
+  "author": {
+    "name": "Eddie Lin",
+    "email": "eddielin0926@gmail.com"
+  },
   "version": "0.0.9",
   "private": true,
   "description": "Automatically integrate your code with LeetCode and GitHub",
   "scripts": {
-    "setup": "npm i",
     "format": "prettier --write **/*.{js,jsx,ts,tsx,css,html}",
     "format-test": "prettier --check **/*.{js,jsx,ts,tsx,css,html}",
     "lint": "eslint **/*.{js,jsx,ts,tsx} --fix",
     "lint-test": "eslint **/*.{js,jsx,ts,tsx} --color"
   },
+  "dependencies": {},
   "devDependencies": {
+    "@types/bun": "^1.1.1",
+    "@types/chrome": "^0.0.268",
+    "@types/eslint": "~7.2.14",
+    "@types/eslint-config-prettier": "~6.11.3",
+    "@types/eslint-plugin-prettier": "~3.1.3",
+    "@types/prettier": "~2.2.3",
+    "commander": "^12.0.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^6.15.0",
@@ -21,5 +32,7 @@
     "eslint-plugin-react-hooks": "^4.0.0",
     "prettier": "^2.2.1"
   },
-  "dependencies": {}
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
