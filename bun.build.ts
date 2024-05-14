@@ -8,9 +8,9 @@ type BuildConfig = {
   sourceMap?: "none" | "inline" | "external";
 };
 
-const build = async (config: BuildConfig) =>
+const build = (config: BuildConfig) =>
   Bun.build({
-    entrypoints: ["./src/background/*.ts", "./src/content_scripts/*.ts"],
+    entrypoints: ["./src/background/index.ts"],
     outdir: config.outDir,
     target: "browser",
     sourcemap: config.sourceMap ?? "none",
