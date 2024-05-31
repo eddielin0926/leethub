@@ -17,12 +17,8 @@ const manifest: chrome.runtime.Manifest = {
   },
   content_scripts: [
     {
-      matches: [
-        "https://leetcode.com/*",
-        "https://github.com/*",
-        "https://practice.geeksforgeeks.org/*",
-      ],
-      js: ["scripts/leetcode.js", "scripts/authorize.js", "scripts/gfg.js"],
+      matches: ["https://leetcode.com/*", "https://github.com/*"],
+      js: ["scripts/leetcode.js", "scripts/authorize.js"],
       run_at: "document_idle",
     },
   ],

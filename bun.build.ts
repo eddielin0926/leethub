@@ -1,5 +1,7 @@
 import { Command } from "commander";
 import { watch } from "fs";
+import path from "path";
+import manifest from "./src/manifest";
 
 type BuildConfig = {
   publicDir: string;
@@ -8,14 +10,82 @@ type BuildConfig = {
   sourceMap?: "none" | "inline" | "external";
 };
 
-const build = (config: BuildConfig) =>
-  Bun.build({
-    entrypoints: ["./src/background/index.ts"],
-    outdir: config.outDir,
+const build = async (config: BuildConfig) => {
+  // manifest.json
+  await Bun.write(`${config.outDir}/manifest.json`, JSON.stringify(manifest));
+
+  const buildOptions = {
+    outdir: path.join(config.outDir, "scripts"),
+    target: "browser",
+    sourcemap: config.sourceMap ?? "none",
+    minify: true,
+  };
+
+  // background
+  await Bun.build({
+    entrypoints: ["./src/background/background.ts"],
+    outdir: path.join(config.outDir, "scripts"),
     target: "browser",
     sourcemap: config.sourceMap ?? "none",
     minify: true,
   });
+
+  // content_scripts
+  await Bun.build({
+    entrypoints: [
+      "./src/content_scripts/authorize.ts",
+      "./src/content_scripts/gfg.ts",
+      "./src/content_scripts/leetcode.ts",
+    ],
+    outdir: path.join(config.outDir, "scripts"),
+    target: "browser",
+    sourcemap: config.sourceMap ?? "none",
+    minify: true,
+  });
+
+  // popup
+  await Bun.build({
+    entrypoints: ["./src/popup/oauth2.ts", "./src/popup/popup.ts"],
+    outdir: path.join(config.outDir, "scripts"),
+    target: "browser",
+    sourcemap: config.sourceMap ?? "none",
+    minify: true,
+  });
+
+  // tabs
+  await Bun.build({
+    entrypoints: ["./src/tabs/welcome.ts"],
+    outdir: path.join(config.outDir, "scripts"),
+    target: "browser",
+    sourcemap: config.sourceMap ?? "none",
+    minify: true,
+  });
+
+  // css
+  const popupCss = Bun.file("./src/popup/popup.css");
+  await Bun.write(`${config.outDir}/css/popup.css`, popupCss);
+
+  const welcomeCss = Bun.file("./src/tabs/welcome.css");
+  await Bun.write(`${config.outDir}/css/welcome.css`, welcomeCss);
+
+  // html
+  const popupHtml = Bun.file("./src/popup/popup.html");
+  await Bun.write(`${config.outDir}/popup.html`, popupHtml);
+
+  const welcomeHtml = Bun.file("./src/tabs/welcome.html");
+  await Bun.write(`${config.outDir}/welcome.html`, welcomeHtml);
+
+  // icons
+  const icons = manifest.icons;
+  if (!icons) {
+    console.error("No icons found in manifest");
+  } else {
+    Object.entries(icons).map(async ([size, path]) => {
+      const file = Bun.file(`${config.publicDir}/${path}`);
+      await Bun.write(`${config.outDir}/${path}`, file);
+    });
+  }
+};
 
 const program = new Command();
 program

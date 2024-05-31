@@ -9,7 +9,7 @@
   "description": "Automatically integrate your code with LeetCode and GitHub",
   "scripts": {
     "dev": "bun run bun.build.ts --watch",
-    "build": "bun build bun.build.ts",
+    "build": "bun run bun.build.ts",
     "format": "prettier --write **/*.{js,jsx,ts,tsx,css,html}",
     "format-test": "prettier --check **/*.{js,jsx,ts,tsx,css,html}",
     "lint": "eslint **/*.{js,jsx,ts,tsx} --fix",
